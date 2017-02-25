@@ -61,20 +61,18 @@ Below are actions performed on application.
     appropriate node.
     
     Or we can send all requests from clients to a routing tier first, which determines the node that should handle the request and forwards 
-    it accordingly. This routing tier does not itself handle any requests, it only acts as a partition aware load balancer
+    it accordingly. This routing tier does not itself handle any requests, it only acts as a partition aware load balancer.
     
- 3) We can use caching on data base for efficient and real time processing. For this we can either use redis or memcached. For multiple event
-    handling we can create a queue like amazon SQS using command pattern and route the requests to specific services using observer pattern.
+    ZooKeeper is often used for service discovery, that is, to find out which IP address you need to connect to in order to reach a 
+    particular service. In cloud datacenter environments, where it is common for virtual machines to continually come and go, 
+    you often don’t know the IP addresses of your services ahead of time. Instead, you can configure your services such that when they 
+    start up, they register their network endpoint in a service registry, where they can then be found by other services.
     
- 4) We can use load balancer like haProxy or nginx to route the requests to specific server and can able to handle users based on geograpy
-    and region.
-   
- 5) We need to provide a strict persistent mechanism to handle multiple events on data base for accurate data update.
  
- We can separately create a data access layer(persistent layer) to handle all the updates related to data base. So that the business or application
+ We can also use a separate data access layer(persistent layer) to handle all the updates related to data base. So that the business or application
  logic does not depend on any particular data base.
  
- We can use no-sql like cassandra for speedup read requests and real time processing from data base.
+ For analytics we can go with batch processing using map reduce.
  
  
  
