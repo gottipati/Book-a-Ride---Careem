@@ -1,15 +1,25 @@
--> Customer will open car booking app.
+Below are actions performed on application.
 
--> App can automatically identify the customer location based on the gps(using geo location api of android or core location api of ios)
-   or customer can enter his location manually. The request can be send to server using node.js. Node.js framework very useful for persistent
-   and reliable systems.
-   
--> The driver locations are updated to back end server asynchronously using push mechanism(pub-sub systems) with time frame.
+*  Customer will open car booking app.
 
--> In real time the server will fetch nearest cabs based on customer location using shortest path algorithm or k-nearest neighbours algorithm. 
-   And it will display early time arrival of the cab.
+*  App can automatically identify the customer location based on the gps(using geo location api of android or core location api of ios)
+   or customer can enter his location manually. The request can be send to server using node.js. Node.js framework very useful for 
+   persistent and reliable systems.
    
- Below are the challenges we have to address by designing this system:
+*  The driver locations are updated to back end server asynchronously using push mechanism(pub-sub systems) with time frame.
+
+*  In real time the server will fetch nearest cabs based on customer location using shortest path algorithm or k-nearest neighbours 
+   algorithm. And it will display early time arrival of the cab.
+   
+ I have implemented above back end solution in java using both Command pattern and simple facade pattern. Command pattern decouples an 
+ object making a request from the one that knows how to perform it. Please find the class diagram in files. The facade pattern defines
+ higher level interface to make subsystems easier to use.
+ 
+ The SQS.java file can act as Queue for storing actual events running on back end. Each event can be considered as a command. For example
+ BookCab.java, CancelCab.java, NearestCabs.java are actual commands. BookARide.java can act as a simple facade for defining higher level
+ functionality of the system. We can use multiple design solutions based on the requirements.
+   
+ Below are the challenges we have to address by designing this system for large scale:
  1) How to handle thousands of customer requests with accurate real time information of cabs location?
  
  2) How we scale the data base with such large amonts of data?
@@ -43,11 +53,6 @@
  
  We can use no-sql like cassandra for speedup read requests and real time processing from data base.
  
- I have created back end java files for booking a cab using command pattern and simple facade pattern. The back end services can 
- automatically process respective actions requested by the clients.
  
- <p align="center">
- <img src="https://github.com/gottipati/Book-a-Ride---Careem/blob/master/back%20end%20java.jpg" width="340"/>
- </p>
  
    
