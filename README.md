@@ -9,4 +9,6 @@ Below are the applications or actual functions of book a ride service.
 -> Based on the geo location of customer, the back end server will display nearest drivers location with early time arrival.
 
 -> The customer can choose his desired cab and confirm the payment.
+
+Please see the design document for complete design of the architecture and code explanations.
     
