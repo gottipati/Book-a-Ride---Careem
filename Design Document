@@ -1,0 +1,45 @@
+-> Customer will open car booking app.
+
+-> App can automatically identify the customer location based on the gps(using geo location api of android or core location api of ios)
+   or customer can enter his location manually. The request can be send to server using node.js. Node.js framework very useful for persistent
+   and reliable systems.
+   
+-> The driver locations are updated to back end server asynchronously using push mechanism(pub-sub systems) with time frame.
+
+-> In real time the server will fetch nearest cabs based on customer location using shortest path algorithm or k-nearest neighbours algorithm. 
+   And it will display early time arrival of the cab.
+   
+ Below are the challenges we have to address by designing this system:
+ 1) How to handle thousands of customer requests with accurate real time information of cabs location?
+ 
+ 2) How we scale the data base with such large amonts of data?
+ 
+ 3) How to handle multiple events like payment, driver locations and customer locations parallely? 
+ 
+ 4) How to route requests to specific server based on customer location?
+ 
+ 5) How to handle parallel requests of bookign a cab and payment if any one of the event fails to reach the server end?
+ 
+ 
+ Below are the design solutions for the above challenges.
+ 
+ 1) At any given point of time we have driver data with their locaitons ids (driver_id, location). The server can maintain location based
+    data based on geography and region. Based on the customer location it can request the nearest location server to return the nearest 
+    driver locations with early time arrival.
+    
+ 2) We can partition the data based on the region based and store it in multiple data base systems like horizontal scaling. Either we
+    can design this solution using master-slave or no-master like amazon dynamo db. 
+    
+ 3) We can use caching on data base for efficient and real time processing. For this we can either use redis or memcached. For multiple event
+    handling we can create a queue like amazon SQS using command pattern and route the requests to specific services using observer pattern.
+    
+ 4) We can use load balancer like haProxy or nginx to route the requests to specific server and can able to handle users based on geograpy
+    and region.
+   
+ 5) We need to provide a strict persistent mechanism to handle multiple events on data base for accurate data update.
+ 
+ We can separately create a data access layer(persistent layer) to handle all the updates related to data base. So that the business or application
+ logic does not depend on any particular data base.
+ 
+ We can use no-sql like cassandra for speedup read requests and real time processing from data base.
+   
