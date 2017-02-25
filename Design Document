@@ -18,7 +18,7 @@
  
  4) How to route requests to specific server based on customer location?
  
- 5) How to handle parallel requests of bookign a cab and payment if any one of the event fails to reach the server end?
+ 5) How to handle parallel requests of booking a cab and payment if any one of the event fails to reach the server end?
  
  
  Below are the design solutions for the above challenges.
@@ -42,4 +42,10 @@
  logic does not depend on any particular data base.
  
  We can use no-sql like cassandra for speedup read requests and real time processing from data base.
+ 
+ I have created back end java files for booking a cab using command pattern and simple facade pattern. The back end services can 
+ automatically process respective actions requested by the clients.
+ 
+ ![alt tag](https://github.com/gottipati/Book-a-Ride---Careem/blob/master/backendjava.jpg)
+ 
    
